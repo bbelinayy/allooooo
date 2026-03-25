@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>🌼</title>
+
+<style>
+body{
+background:#0f0f0f;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:sans-serif;
+flex-direction:column;
+overflow:hidden;
+}
+
+#text{
+font-size:30px;
+text-align:center;
+opacity:0;
+transition:1s;
+margin-bottom:40px;
+}
+
+.bigHeart{
+font-size:160px;
+opacity:0;
+transition:1.5s;
+filter: drop-shadow(0 0 25px red);
+}
+
+.daisy{
+position:absolute;
+font-size:28px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(110vh);}
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="text"></div>
+<div class="bigHeart" id="heart">❤️</div>
+
+<script>
+
+let messages = [
+"Selam 🙂",
+"Son zamanlarda garip bir şey fark ettim…",
+"Senle konuştuğum günler daha güzel geçiyor.",
+"Bunu abartmak istemiyorum ama…",
+"Seni tanımak gerçekten hoşuma gidiyor 🌼",
+"Sana küçük bir sürprizim var..."
+];
+
+let i = 0;
+let text = document.getElementById("text");
+
+function showNext(){
+
+if(i < messages.length){
+
+text.style.opacity = 0;
+
+setTimeout(()=>{
+text.innerHTML = messages[i];
+text.style.opacity = 1;
+i++;
+},800);
+
+}else{
+showHeart();
+}
+
+}
+
+function showHeart(){
+
+let h = document.getElementById("heart");
+
+h.style.opacity = 1;
+
+setTimeout(()=>{
+h.style.opacity = 0;
+startDaisyRain();
+},3000);
+
+}
+
+function startDaisyRain(){
+
+setInterval(()=>{
+let d = document.createElement("div");
+d.innerHTML="🌼";
+d.className="daisy";
+d.style.left=Math.random()*100+"vw";
+d.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(d);
+
+setTimeout(()=>{d.remove()},8000);
+
+},250);
+
+}
+
+setInterval(showNext,3000);
+
+</script>
+
+</body>
+</html>
